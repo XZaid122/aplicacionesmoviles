@@ -1,0 +1,52 @@
+class Persona {
+  String nombre;
+  int edad;
+  String ciudad;
+
+  Persona(this.nombre, this.edad, this.ciudad);
+
+  Persona.desdeJson(Map<String, dynamic> json)
+      : nombre = json['nombre'],
+        edad = json['edad'],
+        ciudad = json['ciudad'];
+
+  void mostrarInformacion() {
+    print('Nombre: $nombre, Edad: $edad, Ciudad: $ciudad');
+  }
+
+  void saludar() {
+    print('Hola, mi nombre es $nombre.');
+  }
+
+  void actualizarCiudad(String nuevaCiudad) {
+    ciudad = nuevaCiudad;
+    print('Ciudad actualizada a $ciudad');
+  }
+
+  String obtenerDescripcion() => 'Soy $nombre y tengo $edad anios.';
+
+  int sumarEdad(int aniosExtra) => edad + aniosExtra;
+}
+
+void main() {
+
+  Persona persona1 = Persona('douglas', 23, 'Cartagena');
+  persona1.mostrarInformacion();
+  persona1.saludar();
+  persona1.actualizarCiudad('Bogota');
+  print(persona1.obtenerDescripcion());
+  print('Edad en 5 anios: ${persona1.sumarEdad(5)}');
+
+  print('-----------------------');
+
+  Map<String, dynamic> json = {
+    'nombre': 'Ana',
+    'edad': 30,
+    'ciudad': 'Madrid'
+  };
+
+  Persona persona2 = Persona.desdeJson(json);
+  persona2.mostrarInformacion();
+  persona2.saludar();
+  print(persona2.obtenerDescripcion());
+}
